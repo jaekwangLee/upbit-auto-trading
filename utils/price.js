@@ -1,4 +1,4 @@
-import { COIN_PRICE_CHANGE_DIRECTION } from "../constant/trading";
+import { COIN_PRICE_CHANGE_DIRECTION } from "../constant/trading.js";
 
 const convertChangePriceDirectionUnit = (unit) => {
   switch (unit) {
