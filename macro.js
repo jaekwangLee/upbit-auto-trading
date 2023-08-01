@@ -1,13 +1,12 @@
 import {
-  TRADING_PERIOD,
   TRADING_SYSTEM_MAX_RECOVERY,
   TRADING_SYSTEM_RECOVERY_PERIOD,
 } from "./constant/trading.js";
 import { PREFER_COIN_MARKET } from "./constant/market.js";
 
-import { convertChangePriceDirectionUnit } from "./utils/price.js";
-
 import UpbitAccount from "./lib/Account.js";
+import { TickerDataFormatter } from "./lib/Ticker.js";
+
 import { fetchAllAccount } from "./api/upbit/account.js";
 import { fetchCurrentTicker } from "./api/upbit/order.js";
 
@@ -27,39 +26,16 @@ const getAllAccount = async () => {
   }
 };
 
-const getCurrentTicker = async (_market) => {
+const getCurrentTicker = async (_markets) => {
   try {
-    const { data } = await fetchCurrentTicker(_market);
-
+    const { data } = await fetchCurrentTicker(_markets);
     if (!Array.isArray(data) || data.length === 0) {
       throw new Error("no responed for ticker");
     }
 
-    const {
-      market,
-      trade_timestamp,
-      trade_price,
-      highest_52_week_price,
-      lowest_52_week_price,
-      change,
-      change_price,
-      change_rate,
-      signed_change_price,
-    } = data[0];
-
-    return {
-      market,
-      tradeDate: new Date(trade_timestamp),
-      changeDirection: convertChangePriceDirectionUnit(change),
-      price: trade_price,
-      changePrice: change_price,
-      changeRate: change_rate,
-      changePriceHasDirection: signed_change_price,
-      oneYearHighestPrice: highest_52_week_price,
-      oneYearLowestPrice: lowest_52_week_price,
-    };
+    return data.map((_ticker) => new TickerDataFormatter(_ticker));
   } catch (error) {
-    console.warn(`[WARN] get current ticker ${_market} failed: ${error}`);
+    console.warn(`[WARN] get current ticker ${_markets.join(', ')} failed: ${error}`);
     return null;
   }
 };
@@ -69,7 +45,7 @@ const runAutoTradingSystem = async () => {
     const balances = await getAllAccount();
     account.updateBalances(balances);
 
-    const ticker = await getCurrentTicker(PREFER_COIN_MARKET.BITCOIN_KRW);
+    const tickers = await getCurrentTicker(Object.values(PREFER_COIN_MARKET).join(', '));
   } catch (error) {
     console.error(`[ERROR] trading system is gone, error: ${error}`);
 
