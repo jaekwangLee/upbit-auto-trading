@@ -12,9 +12,22 @@ const COIN_PRICE_CHANGE_DIRECTION = Object.freeze({
   EVEN: "EVEN",
 });
 
+const ORDER_PRICE_TYPE = Object.freeze({
+  LIMIT: "limit",
+  PRICE: "price",
+  MARKET: "market",
+});
+
+const ORDER_TYPE = Object.freeze({
+  BID: 'bid',
+  ASK: 'ask',
+});
+
 export {
   TRADING_PERIOD,
   TRADING_SYSTEM_MAX_RECOVERY,
   TRADING_SYSTEM_RECOVERY_PERIOD,
   COIN_PRICE_CHANGE_DIRECTION,
+  ORDER_PRICE_TYPE,
+  ORDER_TYPE,
 };

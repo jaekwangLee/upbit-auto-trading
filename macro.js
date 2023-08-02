@@ -9,6 +9,7 @@ import { TickerDataFormatter } from "./lib/Ticker.js";
 
 import { fetchAllAccount } from "./api/upbit/account.js";
 import { fetchCurrentTicker } from "./api/upbit/order.js";
+import Trader from "./lib/Trade/index.js";
 
 let currRecoveryCount = 0;
 const account = UpbitAccount.getInstance();
@@ -26,26 +27,50 @@ const getAllAccount = async () => {
   }
 };
 
-const getCurrentTicker = async (_markets) => {
+const getPreferMarketTickerList = async () => {
+  const preferMarkets = Object.values(PREFER_COIN_MARKET).join(', ');
   try {
-    const { data } = await fetchCurrentTicker(_markets);
+    const { data } = await fetchCurrentTicker(preferMarkets);
     if (!Array.isArray(data) || data.length === 0) {
       throw new Error("no responed for ticker");
     }
 
     return data.map((_ticker) => new TickerDataFormatter(_ticker));
   } catch (error) {
-    console.warn(`[WARN] get current ticker ${_markets.join(', ')} failed: ${error}`);
+    console.warn(`[WARN] get prefer market ticker ${preferMarkets.join(', ')} failed: ${error}`);
     return null;
   }
 };
+
+const getTicker = async (ticker) => {
+  try {
+    const { data } = await fetchCurrentTicker([ticker]);
+    if (!Array.isArray(data) || data.length === 0) {
+      throw new Error("no responed for ticker");
+    }
+
+    return new TickerDataFormatter(data[0]);
+  } catch(error) {
+    console.warn(`[WARN] get ticker ${ticker} failed: ${error}`);
+    return null;
+  }
+}
 
 const runAutoTradingSystem = async () => {
   try {
     const balances = await getAllAccount();
     account.updateBalances(balances);
 
-    const tickers = await getCurrentTicker(Object.values(PREFER_COIN_MARKET).join(', '));
+    // TODO
+    // 이후에 tikcers를 새로 받아오고 전환하는 기능도 추가해야함. 
+    // 한 종목만 파지말고 매매패턴 한번 돌린 후에는 종목으로 갈아타도록
+
+    const tickers = await getPreferMarketTickerList();
+
+    const trader = new Trader();
+    trader.setTickerByPerferTickers(tickers)
+          .setDataManager();
+
   } catch (error) {
     console.error(`[ERROR] trading system is gone, error: ${error}`);
 
