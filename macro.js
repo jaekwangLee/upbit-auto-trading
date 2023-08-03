@@ -1,15 +1,17 @@
 import {
+  ORDER_TYPE,
   TRADING_SYSTEM_MAX_RECOVERY,
   TRADING_SYSTEM_RECOVERY_PERIOD,
 } from "./constant/trading.js";
 import { PREFER_COIN_MARKET } from "./constant/market.js";
 
+import { TickerDataFormatter } from "./lib/Formatter/Ticker.js";
+import { OrderHistoryFormatter } from "./lib/Formatter/Order.js";
 import UpbitAccount from "./lib/Account.js";
-import { TickerDataFormatter } from "./lib/Ticker.js";
+import Trader from "./lib/Trade/index.js";
 
 import { fetchAllAccount } from "./api/upbit/account.js";
-import { fetchCurrentTicker } from "./api/upbit/order.js";
-import Trader from "./lib/Trade/index.js";
+import { buyOrderUpbitCoin, fetchCurrentTicker, sellOrderUpbitCoin } from "./api/upbit/order.js";
 
 let currRecoveryCount = 0;
 const account = UpbitAccount.getInstance();
@@ -52,6 +54,17 @@ const getTicker = async (ticker) => {
     return new TickerDataFormatter(data[0]);
   } catch(error) {
     console.warn(`[WARN] get ticker ${ticker} failed: ${error}`);
+    return null;
+  }
+}
+
+const orderCoin = async (type, ticker, volume) => {
+  try {
+    const { data } = type === ORDER_TYPE.BID ? await buyOrderUpbitCoin(ticker, { volume }) : await sellOrderUpbitCoin(ticker, { volume });
+
+    return new OrderHistoryFormatter(data, type);
+  } catch(error) {
+    console.warn(`[WARN] failed order - ${type} "${ticker}": ${volume}... ${error}`);
     return null;
   }
 }

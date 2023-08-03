@@ -23,6 +23,12 @@ const ORDER_TYPE = Object.freeze({
   ASK: 'ask',
 });
 
+const MOVING_AVERAGE_MINUTE = Object.freeze({
+  FIVE: 5,
+  TWENTY: 20,
+  SIXTY: 60,
+});
+
 export {
   TRADING_PERIOD,
   TRADING_SYSTEM_MAX_RECOVERY,
@@ -30,4 +36,5 @@ export {
   COIN_PRICE_CHANGE_DIRECTION,
   ORDER_PRICE_TYPE,
   ORDER_TYPE,
+  MOVING_AVERAGE_MINUTE,
 };
