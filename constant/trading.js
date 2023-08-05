@@ -1,5 +1,5 @@
 const MILLISECONDS = 1000;
-const MINUTE = 60 & MILLISECONDS;
+const MINUTE = 60 * MILLISECONDS;
 
 const TRADING_PERIOD = (MINUTE * MILLISECONDS) / 2;
 
@@ -19,8 +19,8 @@ const ORDER_PRICE_TYPE = Object.freeze({
 });
 
 const ORDER_TYPE = Object.freeze({
-  BID: 'bid',
-  ASK: 'ask',
+  BID: "bid",
+  ASK: "ask",
 });
 
 const MOVING_AVERAGE_MINUTE = Object.freeze({
@@ -28,6 +28,8 @@ const MOVING_AVERAGE_MINUTE = Object.freeze({
   TWENTY: 20,
   SIXTY: 60,
 });
+
+const TICKER_REQUEST_TIMING = 10 * MILLISECONDS;
 
 export {
   TRADING_PERIOD,
@@ -37,4 +39,6 @@ export {
   ORDER_PRICE_TYPE,
   ORDER_TYPE,
   MOVING_AVERAGE_MINUTE,
+  TICKER_REQUEST_TIMING,
+  MILLISECONDS,
 };
