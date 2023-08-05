@@ -71,9 +71,6 @@ const runAutoTradingSystem = async () => {
   const trader = new Trader();
 
   try {
-    const balances = await getAllAccount();
-    account.updateBalances(balances);
-
     // TODO
     // 이후에 tikcers를 새로 받아오고 전환하는 기능도 추가해야함.
     // 한 종목만 파지말고 매매패턴 한번 돌린 후에는 종목으로 갈아타도록
