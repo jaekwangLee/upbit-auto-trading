@@ -1,3 +1,5 @@
+/** @format */
+
 import {
   ORDER_TYPE,
   TRADING_SYSTEM_MAX_RECOVERY,
@@ -35,7 +37,7 @@ const getAllAccount = async () => {
 
 const getPreferMarketTickerList = async () => {
   const preferMarkets = Object.values(PREFER_COIN_MARKET).join(", ");
-  console.log("preferMarkets", preferMarkets);
+
   try {
     const { data } = await fetchCurrentTicker(preferMarkets);
     if (!Array.isArray(data) || data.length === 0) {
@@ -46,22 +48,6 @@ const getPreferMarketTickerList = async () => {
   } catch (error) {
     console.warn(
       `[WARN] get prefer market ticker ${preferMarkets} failed: ${error}`
-    );
-    return null;
-  }
-};
-
-const orderCoin = async (type, ticker, volume) => {
-  try {
-    const { data } =
-      type === ORDER_TYPE.BID
-        ? await buyOrderUpbitCoin(ticker, { volume })
-        : await sellOrderUpbitCoin(ticker, { volume });
-
-    return new OrderHistoryFormatter(data, type);
-  } catch (error) {
-    console.warn(
-      `[WARN] failed order - ${type} "${ticker}": ${volume}... ${error}`
     );
     return null;
   }

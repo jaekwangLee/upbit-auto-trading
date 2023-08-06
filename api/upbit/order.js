@@ -1,35 +1,43 @@
+/** @format */
+
 import { REST_API_METHOD } from "../../constant/network.js";
 import { ORDER_PRICE_TYPE, ORDER_TYPE } from "../../constant/trading.js";
 
-import { upbitInstance, request } from "../instance.js";
+import { upbitInstance, requestAPI, upbitRequest } from "../instance.js";
+
+import UpbitAuth from "../../lib/UpbitAuth.js";
 
 const fetchCurrentTicker = (markets = []) => {
-  return request(upbitInstance, "/ticker", REST_API_METHOD.GET, {
+  return requestAPI(upbitInstance, "/ticker", REST_API_METHOD.GET, {
     params: {
       markets: markets,
     },
   });
 };
 
-const buyOrderUpbitCoin = (ticker, { price = 0, volume = 0, orderType = ORDER_PRICE_TYPE.MARKET }) => {
+const buyOrderUpbitCoin = (
+  ticker,
+  { price = 0, volume = 0, orderType = ORDER_PRICE_TYPE.LIMIT }
+) => {
   const data = {
-    side: ORDER_TYPE.BID,
     market: ticker,
+    side: ORDER_TYPE.BID,
     ord_type: orderType,
+    price: price.toString(), // 얼마에 살지
+    volume: volume.toFixed(8), // 얼마나 살지
   };
 
-  if (price) {
-    data.price = price;
-  }
+  const headers = {
+    Authorization: UpbitAuth.getInstance().getAuthToken(data),
+  };
 
-  if (volume) {
-    data.volume = volume;
-  }
+  return upbitRequest("/orders", REST_API_METHOD.POST, { data, headers });
+};
 
-  return request(upbitInstance, "/orders", REST_API_METHOD.POST, { data })
-}
-
-const sellOrderUpbitCoin = (ticker, { price = 0, volume = 0, orderType = ORDER_PRICE_TYPE.MARKET }) => {
+const sellOrderUpbitCoin = (
+  ticker,
+  { price = 0, volume = 0, orderType = ORDER_PRICE_TYPE.MARKET }
+) => {
   const data = {
     side: ORDER_TYPE.ASK,
     market: ticker,
@@ -44,7 +52,7 @@ const sellOrderUpbitCoin = (ticker, { price = 0, volume = 0, orderType = ORDER_P
     data.volume = volume;
   }
 
-  return request(upbitInstance, "/orders", REST_API_METHOD.POST, { data })
-}
+  return request(upbitInstance, "/orders", REST_API_METHOD.POST, { data });
+};
 
 export { fetchCurrentTicker, buyOrderUpbitCoin, sellOrderUpbitCoin };
