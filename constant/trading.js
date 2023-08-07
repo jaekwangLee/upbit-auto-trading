@@ -37,7 +37,11 @@ const TRADE_REQUEST_TIMING = 6 * TICKER_REQUEST_TIMING;
 
 const TRADE_AVERAGE_VALUE_TIMING = TRADE_REQUEST_TIMING; // 5 * TRADE_REQUEST_TIMING;
 
-const MIN_AVENUE_RATE = 0.03; // 5분이내에 0.03%의 변동이 생겼다면 수익을 낼 수 있는 합리적인 하락이라고 봄
+const MIN_BUY_AVENUE_RATE = 0.003; // 5분이내에 0.03%의 변동이 생겼다면 수익을 낼 수 있는 합리적인 하락이라고 봄
+
+const MIN_SELL_AVENUE_RATE = 0.01; // 업비트 수수료인 0.5%이상의 수익을 냈을때 매도
+
+const MIN_SELL_LOSS_RATE = 0.006; // 손절 타이밍
 
 export {
   TRADING_PERIOD,
@@ -51,5 +55,7 @@ export {
   MILLISECONDS,
   TRADE_REQUEST_TIMING,
   TRADE_AVERAGE_VALUE_TIMING,
-  MIN_AVENUE_RATE,
+  MIN_BUY_AVENUE_RATE,
+  MIN_SELL_AVENUE_RATE,
+  MIN_SELL_LOSS_RATE,
 };
