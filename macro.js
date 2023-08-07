@@ -1,39 +1,19 @@
 /** @format */
 
 import {
-  ORDER_TYPE,
   TRADING_SYSTEM_MAX_RECOVERY,
   TRADING_SYSTEM_RECOVERY_PERIOD,
 } from "./constant/trading.js";
 import { PREFER_COIN_MARKET } from "./constant/market.js";
 
 import TickerDataFormatter from "./lib/Formatter/Ticker.js";
-import OrderHistoryFormatter from "./lib/Formatter/Order.js";
-import UpbitAccount from "./lib/Account.js";
 import Trader from "./lib/Trade/index.js";
 
-import { fetchAllAccount } from "./api/upbit/account.js";
 import {
-  buyOrderUpbitCoin,
   fetchCurrentTicker,
-  sellOrderUpbitCoin,
 } from "./api/upbit/order.js";
 
 let currRecoveryCount = 0;
-const account = UpbitAccount.getInstance();
-
-const getAllAccount = async () => {
-  try {
-    const { data } = await fetchAllAccount();
-    return data.map((_balance) => ({
-      currency: _balance.currency,
-      balance: _balance.balance,
-    }));
-  } catch (error) {
-    console.warn(`[WARN] get all account balance failed: ${error}`);
-    return [];
-  }
-};
 
 const getPreferMarketTickerList = async () => {
   const preferMarkets = Object.values(PREFER_COIN_MARKET).join(", ");

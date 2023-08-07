@@ -65,9 +65,10 @@ const upbitRequest = (url, method, { params, data, headers = {} }) => {
           return;
         }
 
-        console.log("[RES] ", res);
+        console.log("[RES] ", res.body);
+        
 
-        resolve(body);
+        resolve(res.body);
       });
     });
   } catch (error) {
