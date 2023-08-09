@@ -41,13 +41,10 @@ const runAutoTradingSystem = async () => {
     // 이후에 tikcers를 새로 받아오고 전환하는 기능도 추가해야함.
     // 한 종목만 파지말고 매매패턴 한번 돌린 후에는 종목으로 갈아타도록
 
-    const tickers = await getPreferMarketTickerList();
+    const tickers = await getPreferMarketTickerList(tickers);
 
-    trader
-      .setTickerByPerferTickers(tickers)
-      .setDataManager()
-      .runTickerDataCollector()
-      .runTradeWorker();
+    trader.runTickerDataCollector()
+          .runTradeWorker();
   } catch (error) {
     console.error(`[ERROR] trading system is gone, error: ${error}`);
 
@@ -55,8 +52,7 @@ const runAutoTradingSystem = async () => {
       currRecoveryCount++;
       setTimeout(runAutoTradingSystem, TRADING_SYSTEM_RECOVERY_PERIOD);
     } else {
-      trader.destroyDataCollector();
-      trader.destroyTrader();
+      trader.destroyWorkers();
     }
   }
 };

@@ -8,11 +8,12 @@ import { upbitInstance, requestAPI, upbitRequest } from "../instance.js";
 import UpbitAuth from "../../lib/UpbitAuth.js";
 
 const fetchCurrentTicker = (markets = []) => {
-  return requestAPI(upbitInstance, "/ticker", REST_API_METHOD.GET, {
-    params: {
-      markets: markets,
-    },
-  });
+  // return requestAPI(upbitInstance, "/ticker", REST_API_METHOD.GET, {
+  //   params: {
+  //     markets: markets,
+  //   },
+  // });
+  return upbitRequest("/ticker", REST_API_METHOD.GET, { params: { markets } })
 };
 
 const buyOrderUpbitCoin = (
@@ -39,20 +40,18 @@ const sellOrderUpbitCoin = (
   { price = 0, volume = 0, orderType = ORDER_PRICE_TYPE.MARKET }
 ) => {
   const data = {
-    side: ORDER_TYPE.ASK,
     market: ticker,
+    side: ORDER_TYPE.ASK,
     ord_type: orderType,
+    price: price.toString(),
+    volume: volume.toFixed(8),
   };
 
-  if (price) {
-    data.price = price;
+  const headers = {
+    Authorization: UpbitAuth.getInstance().getAuthToken(data),
   }
 
-  if (volume) {
-    data.volume = volume;
-  }
-
-  return request(upbitInstance, "/orders", REST_API_METHOD.POST, { data });
+  return upbitRequest("/orders", REST_API_METHOD.POST, { data, headers });
 };
 
 export { fetchCurrentTicker, buyOrderUpbitCoin, sellOrderUpbitCoin };
