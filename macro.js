@@ -17,9 +17,7 @@ const getPreferMarketTickerList = async () => {
   const preferMarkets = Object.values(PREFER_COIN_MARKET).join(", ");
 
   try {
-    const response = await fetchCurrentTicker(preferMarkets);
-    console.log("daddddta", response);
-
+    const { data: response } = await fetchCurrentTicker(preferMarkets);
     if (!Array.isArray(response) || response.length === 0) {
       throw new Error("no responed for ticker");
     }

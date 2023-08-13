@@ -13,6 +13,7 @@ class Database {
         } else {
           console.log("Connected to the database.");
           this.#initialize();
+          Database.instance = this;
         }
       });
     }
@@ -22,7 +23,6 @@ class Database {
 
   #initialize() {
     this.#useForeignKey()
-      .#createUserTable()
       .#createTradeTable()
       .#createBidTable()
       .#createAsktable()
@@ -39,31 +39,15 @@ class Database {
     return this;
   }
 
-  #createUserTable() {
-    try {
-      this.db.run(`CREATE TABLE IF NOT EXISTS users (
-                  userIdx INTEGER PRIMARY KEY,
-                  id TEXT NOT NULL,
-
-                  registered_at TEXT
-                )`);
-    } catch (error) {
-      console.warn(`[WARN] DB table run - user: `, error);
-    }
-
-    return this;
-  }
-
   #createTradeTable() {
     try {
       this.db.run(`CREATE TABLE IF NOT EXISTS trades (
                   tradeIdx INTEGER PRIMARY KEY,
-                  userIdx INTEGER,
-                  bidIdx INTEGER DEFAULT 0,
-                  askIdx INTEGER DEFAULT 0,
+                  bidIdx INTEGER,
+                  askIdx INTEGER,
                   type INTEGER CHECK (type IN (0, 1)),
+                  reason TEXT,
 
-                  FOREIGN KEY (userIdx) REFERENCES users(userIdx),
                   FOREIGN KEY (bidIdx) REFERENCES bids(bidIdx),
                   FOREIGN KEY (askIdx) REFERENCES asks(askIdx)
                 )`);
@@ -111,14 +95,11 @@ class Database {
   #createBalanceTable() {
     try {
       this.db.run(`CREATE TABLE IF NOT EXISTS balances (
-                  userIdx INTEGER,
+                  balanceIdx INTEGER PRIMARY KEY,
                   ticker TEXT,
                   price INTEGER DEFAULT 0,
                   volume INTEGER DEFAULT 0,
-                  timestamp TEXT,
-
-                  PRIMARY KEY (userIdx, ticker),
-                  FOREIGN KEY (userIdx) REFERENCES users(userIdx)
+                  timestamp TEXT
               )`);
     } catch (error) {
       console.warn(`[WARN] DB table run - balances`, error);

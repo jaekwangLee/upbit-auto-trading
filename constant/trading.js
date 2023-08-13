@@ -31,7 +31,7 @@ const MOVING_AVERAGE_MINUTE = Object.freeze({
   SIXTY: 60,
 });
 
-const TICKER_REQUEST_TIMING = 2 * MILLISECONDS; // FOR TEST: 2, FOR REAL: 10
+const TICKER_REQUEST_TIMING = 5 * MILLISECONDS; // FOR TEST: 2, FOR REAL: 10
 
 const TRADE_REQUEST_TIMING = 6 * TICKER_REQUEST_TIMING;
 
@@ -39,9 +39,9 @@ const TRADE_AVERAGE_VALUE_TIMING = TRADE_REQUEST_TIMING; // 5 * TRADE_REQUEST_TI
 
 const MIN_BUY_AVENUE_RATE = 0; //0.003; // 5분이내에 0.03%의 변동이 생겼다면 수익을 낼 수 있는 합리적인 하락이라고 봄
 
-const MIN_SELL_AVENUE_RATE = 0.01; // 업비트 수수료인 0.5%이상의 수익을 냈을때 매도
+const STOP_GREED_RATE = 0.01; // 업비트 수수료인 0.5%이상의 수익을 냈을때 매도
 
-const MIN_SELL_LOSS_RATE = 0.006; // 손절 타이밍
+const STOP_LOSS_RATE = 0.008; // 손절 타이밍
 
 export {
   TRADING_PERIOD,
@@ -56,6 +56,6 @@ export {
   TRADE_REQUEST_TIMING,
   TRADE_AVERAGE_VALUE_TIMING,
   MIN_BUY_AVENUE_RATE,
-  MIN_SELL_AVENUE_RATE,
-  MIN_SELL_LOSS_RATE,
+  STOP_GREED_RATE,
+  STOP_LOSS_RATE,
 };
