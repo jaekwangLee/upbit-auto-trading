@@ -9,9 +9,7 @@ import { PREFER_COIN_MARKET } from "./constant/market.js";
 import TickerDataFormatter from "./lib/Formatter/Ticker.js";
 import Trader from "./lib/Trade/index.js";
 
-import {
-  fetchCurrentTicker,
-} from "./api/upbit/order.js";
+import { fetchCurrentTicker } from "./api/upbit/order.js";
 
 let currRecoveryCount = 0;
 
@@ -19,12 +17,14 @@ const getPreferMarketTickerList = async () => {
   const preferMarkets = Object.values(PREFER_COIN_MARKET).join(", ");
 
   try {
-    const { data } = await fetchCurrentTicker(preferMarkets);
-    if (!Array.isArray(data) || data.length === 0) {
+    const response = await fetchCurrentTicker(preferMarkets);
+    console.log("daddddta", response);
+
+    if (!Array.isArray(response) || response.length === 0) {
       throw new Error("no responed for ticker");
     }
 
-    return data.map((_ticker) => new TickerDataFormatter(_ticker));
+    return response.map((_ticker) => new TickerDataFormatter(_ticker));
   } catch (error) {
     console.warn(
       `[WARN] get prefer market ticker ${preferMarkets} failed: ${error}`
@@ -41,10 +41,8 @@ const runAutoTradingSystem = async () => {
     // 이후에 tikcers를 새로 받아오고 전환하는 기능도 추가해야함.
     // 한 종목만 파지말고 매매패턴 한번 돌린 후에는 종목으로 갈아타도록
 
-    const tickers = await getPreferMarketTickerList(tickers);
-
-    trader.runTickerDataCollector()
-          .runTradeWorker();
+    const tickers = await getPreferMarketTickerList();
+    trader.build(tickers).runTickerDataCollector().runTradeWorker();
   } catch (error) {
     console.error(`[ERROR] trading system is gone, error: ${error}`);
 

@@ -1,9 +1,12 @@
+/** @format */
+
 import express from "express";
 import dotenv from "dotenv";
 
 dotenv.config();
 
 import { runAutoTradingSystem } from "./macro.js";
+import Database from "./db.js";
 
 class App {
   constructor() {
@@ -18,6 +21,8 @@ class App {
 
   run() {
     this.app.listen(process.env.PORT, this.#appServerListener);
+
+    new Database(process.env.DATABASE);
   }
 }
 
