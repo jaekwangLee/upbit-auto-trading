@@ -7,7 +7,7 @@ import { upbitInstance, requestAPI, upbitRequest } from "../instance.js";
 
 import UpbitAuth from "../../lib/UpbitAuth.js";
 
-const fetchCurrentTicker = (markets = []) => {
+const fetchCurrentTicker = (markets = '') => {
   return requestAPI(upbitInstance, "/ticker", REST_API_METHOD.GET, {
     params: {
       markets: markets,

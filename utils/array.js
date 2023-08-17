@@ -1,19 +1,23 @@
 const reduceArrayWithSameKey = (originArr, arr, key) => {
   return originArr.reduce((prev, val) => {
-    const matchedValueIndex = arr.indexOf((item) => item[key] === val[key]);
+    const matchedValueIndex = arr.findIndex((item) => item[key] === val[key]);
+    const matchedValue = arr[matchedValueIndex];
     if (!matchedValue) {
       return prev;
     }
-
-    const matchedValue = arr[matchedValueIndex];
+    
     const prevArrMatchedValueIndex = prev.indexOf((prevItem) => prevItem[key] === matchedValue[key]);
 
-    if (!prevArrMatchedValueIndex) {
-      prev.push(matchedValue);
+    if (prevArrMatchedValueIndex < 0) {
+      prev.push({
+        ...matchedValue,
+        ...val,
+      });
     } else {
       prev[matchedValueIndex] = {
         ...prev[matchedValueIndex],
         ...matchedValue,
+        ...val,
       };
     }
 
