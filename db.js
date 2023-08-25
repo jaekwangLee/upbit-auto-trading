@@ -48,8 +48,8 @@ class Database {
                   type INTEGER CHECK (type IN (0, 1)),
                   reason TEXT,
 
-                  FOREIGN KEY (bidIdx) REFERENCES bids(bidIdx),
-                  FOREIGN KEY (askIdx) REFERENCES asks(askIdx)
+                  FOREIGN KEY (bidIdx) REFERENCES bids(bidIdx) ON DELETE SET NULL,
+                  FOREIGN KEY (askIdx) REFERENCES asks(askIdx) ON DELETE SET NULL
                 )`);
     } catch (error) {
       console.warn(`[WARN] DB table run - trade: `, error);
