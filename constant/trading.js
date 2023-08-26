@@ -37,7 +37,7 @@ const TRADE_REQUEST_TIMING = 6 * TICKER_REQUEST_TIMING;
 
 const TRADE_AVERAGE_VALUE_TIMING = TRADE_REQUEST_TIMING; // 5 * TRADE_REQUEST_TIMING;
 
-const MIN_BUY_AVENUE_RATE = 0; //0.03; // 5분이내에 0.03%의 변동이 생겼다면 수익을 낼 수 있는 합리적인 하락이라고 봄
+const MIN_BUY_AVENUE_RATE = 0.03; //0.03; // 5분이내에 0.03%의 변동이 생겼다면 수익을 낼 수 있는 합리적인 하락이라고 봄
 
 const STOP_GREED_RATE = 0.005; // 업비트 수수료인 0.5%이상의 수익을 냈을때 매도
 

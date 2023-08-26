@@ -65,6 +65,8 @@ const upbitRequest = (url, method, { params, data, headers = {} }) => {
           return;
         }
 
+        console.log('[ORDER REQUEST RESULT]: ', res.body)
+
         resolve(res.body);
       });
     });

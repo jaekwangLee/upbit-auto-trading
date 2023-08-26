@@ -31,6 +31,8 @@ const buyOrderUpbitCoin = (
     Authorization: UpbitAuth.getInstance().getAuthToken(data),
   };
 
+  console.log('[Buy] data: ', data)
+
   return upbitRequest("/orders", REST_API_METHOD.POST, { data, headers });
 };
 
@@ -42,13 +44,15 @@ const sellOrderUpbitCoin = (
     market: ticker,
     side: ORDER_TYPE.ASK,
     ord_type: orderType,
-    price: price.toString(),
+    price: orderType === ORDER_PRICE_TYPE.MARKET ? null : price.toString(),
     volume: volume.toFixed(8),
   };
 
   const headers = {
     Authorization: UpbitAuth.getInstance().getAuthToken(data),
   };
+
+  console.log('[Sell] data: ', data)
 
   return upbitRequest("/orders", REST_API_METHOD.POST, { data, headers });
 };

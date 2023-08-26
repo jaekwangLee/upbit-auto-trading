@@ -1,6 +1,6 @@
 /** @format */
 
-import { ORDER_BOOK_TICK } from "../constant/currency.js";
+import CURRENCY, { ORDER_BOOK_TICK } from "../constant/currency.js";
 import { COIN_PRICE_CHANGE_DIRECTION } from "../constant/trading.js";
 
 const convertChangePriceDirectionUnit = (unit) => {
@@ -48,4 +48,17 @@ const getOrderBookScaleTickByPriceRange = (tickerPrice) => {
   }
 };
 
-export { convertChangePriceDirectionUnit, getOrderPossiblePrice, getMaxVolume };
+const getTickerWithCurrency = (ticker, currency = CURRENCY.KRW) => {
+  return `${currency}-${ticker}`;
+}
+
+const getTickerWithoutCurrency = (ticker) => {
+  const tickerIndex = ticker.indexOf('-');
+  if (tickerIndex >= 0) {
+    ticker = ticker.slice(tickerIndex + 1);
+  }
+
+  return ticker;
+}
+
+export { convertChangePriceDirectionUnit, getOrderPossiblePrice, getMaxVolume, getTickerWithCurrency, getTickerWithoutCurrency };
