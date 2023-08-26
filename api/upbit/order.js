@@ -31,8 +31,6 @@ const buyOrderUpbitCoin = (
     Authorization: UpbitAuth.getInstance().getAuthToken(data),
   };
 
-  console.log('[Buy] data: ', data)
-
   return upbitRequest("/orders", REST_API_METHOD.POST, { data, headers });
 };
 
@@ -51,8 +49,6 @@ const sellOrderUpbitCoin = (
   const headers = {
     Authorization: UpbitAuth.getInstance().getAuthToken(data),
   };
-
-  console.log('[Sell] data: ', data)
 
   return upbitRequest("/orders", REST_API_METHOD.POST, { data, headers });
 };

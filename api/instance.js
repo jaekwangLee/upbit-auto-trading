@@ -5,6 +5,8 @@ import request from "request";
 
 import { CONTENT_TYPE, REST_API_METHOD } from "../constant/network.js";
 
+import { dConsole, dConsoleWarn } from "../utils/log.js";
+
 const BASE_UPBIT_URL = "https://api.upbit.com/v1";
 
 const upbitInstance = axios.create({
@@ -32,9 +34,7 @@ const requestAPI = (
       });
     }
   } catch (error) {
-    console.warn(
-      `[WARN] network request failed url: ${url}, message: ${error}`
-    );
+    dConsole(`network request failed url: ${url}, message: ${error}`);
     return error;
   }
 };
@@ -65,15 +65,13 @@ const upbitRequest = (url, method, { params, data, headers = {} }) => {
           return;
         }
 
-        console.log('[ORDER REQUEST RESULT]: ', res.body)
+        dConsole('[ORDER REQUEST RESULT]: ', res.body)
 
         resolve(res.body);
       });
     });
   } catch (error) {
-    console.warn(
-      `[WARN] network request failed url: ${url}, message: ${error}`
-    );
+    dConsoleWarn(`network request failed url: ${url}, message: ${error}`);
     return error;
   }
 };

@@ -2,6 +2,8 @@
 
 import sqlite3 from "sqlite3";
 
+import { dConsole, dConsoleWarn, dConsoleError } from "./utils/log.js";
+
 class Database {
   static instance = null;
 
@@ -9,9 +11,9 @@ class Database {
     if (!Database.instance) {
       this.db = new sqlite3.Database(path, (err) => {
         if (err) {
-          console.error("Database connection error:", err.message);
+          dConsoleError("Database connection error:", err.message);
         } else {
-          console.log("Connected to the database.");
+          dConsole("Connected to the database.");
           this.#initialize();
           Database.instance = this;
         }
@@ -33,7 +35,7 @@ class Database {
     try {
       this.db.run("PRAGMA foreign_keys = ON");
     } catch (error) {
-      console.warn(`[WARN] DB table run - foreignkey: `, error);
+      dConsoleWarn("DB table run - foreignkey: ", error);
     }
 
     return this;
@@ -52,7 +54,7 @@ class Database {
                   FOREIGN KEY (askIdx) REFERENCES asks(askIdx) ON DELETE SET NULL
                 )`);
     } catch (error) {
-      console.warn(`[WARN] DB table run - trade: `, error);
+      dConsoleWarn("DB table run - trade: ", error);
     }
 
     return this;
@@ -69,7 +71,7 @@ class Database {
               timestamp TEXT
           )`);
     } catch (error) {
-      console.warn(`[WARN] DB table run - bids`, error);
+      dConsoleWarn("DB table run - bids: ", error);
     }
 
     return this;
@@ -86,7 +88,7 @@ class Database {
                   timestamp TEXT
               )`);
     } catch (error) {
-      console.warn(`[WARN] DB table run - asks`, error);
+      dConsoleWarn("DB table run - asks: ", error);
     }
 
     return this;
@@ -102,7 +104,7 @@ class Database {
                   timestamp TEXT
               )`);
     } catch (error) {
-      console.warn(`[WARN] DB table run - balances`, error);
+      dConsoleWarn("DB table run - balances: ", error);
     }
 
     return this;
