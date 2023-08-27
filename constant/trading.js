@@ -39,7 +39,7 @@ const STOP_GREED_RATE = 0.006; // 업비트 수수료인 0.5%이상의 수익을
 
 const STOP_LOSS_RATE = 0.008; // 손절 타이밍
 
-const MIN_BUY_AVENUE_RATE = STOP_GREED_RATE; //0.03; // 5분이내에 0.03%의 변동이 생겼다면 수익을 낼 수 있는 합리적인 하락이라고 봄
+const MIN_BUY_AVENUE_RATE = STOP_GREED_RATE / 2; //0.003; // 5분이내에 0.003%의 변동이 생겼다면 수익을 낼 수 있는 합리적인 하락이라고 봄
 
 export {
   TRADING_SYSTEM_MAX_RECOVERY,
