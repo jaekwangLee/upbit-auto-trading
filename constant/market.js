@@ -6,6 +6,10 @@ const PREFER_COIN_MARKET = Object.freeze({
   DOGE: "KRW-DOGE",
   ARK: "KRW-ARK",
   STELALUMEN: "KRW-XLM",
+  BTT: "KRW-BTT",
+  POWR: "KRW-POWR",
+  BLUR: 'KRW-BLUR',
+  BITCOIN: 'KRW-BTC',
 });
 
 export { PREFER_COIN_MARKET };

@@ -1,8 +1,8 @@
 import { dateFormat } from './date.js';
 
-export const dConsole = (...args) => {
+export const dConsole = (...args) => {   
   console.log(`[${dateFormat(new Date(), 'YYYY-MM-DD hh:mm:ss')}]`);
-  console.log('[Log] ', ...args);
+  console.log(`[Log]`, ...args);
   console.log('================================================')
 }
 

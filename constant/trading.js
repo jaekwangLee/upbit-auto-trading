@@ -37,9 +37,9 @@ const TRADE_AVERAGE_VALUE_TIMING = TRADE_REQUEST_TIMING; // 5 * TRADE_REQUEST_TI
 
 const STOP_GREED_RATE = 0.006; // 업비트 수수료인 0.5%이상의 수익을 냈을때 매도
 
-const STOP_LOSS_RATE = 0.008; // 손절 타이밍
+const STOP_LOSS_RATE = 0.006; // 손절 타이밍
 
-const MIN_BUY_AVENUE_RATE = STOP_GREED_RATE / 2; //0.003; // 5분이내에 0.003%의 변동이 생겼다면 수익을 낼 수 있는 합리적인 하락이라고 봄
+const MIN_BUY_AVENUE_RATE = 0; // 아무때나 매수함; STOP_GREED_RATE / 2;
 
 export {
   TRADING_SYSTEM_MAX_RECOVERY,
