@@ -22,7 +22,11 @@ const reduceArrayWithSameKey = (originArr, arr, key) => {
     }
 
     return prev;
-  }, [])
+  }, []);
 }
 
-export { reduceArrayWithSameKey }
+const getAverageByNumberField = (data = [], key) => {
+  return data.reduce((acc, val) => acc + val[key] , 0) / data.length;
+}
+
+export { reduceArrayWithSameKey, getAverageByNumberField }
