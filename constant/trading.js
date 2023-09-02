@@ -29,9 +29,9 @@ const MOVING_AVERAGE_MINUTE = Object.freeze({
   SIXTY: 60,
 });
 
-const TICKER_REQUEST_TIMING = 10 * MILLISECONDS; // 10s
+const TICKER_REQUEST_TIMING = 5 * MILLISECONDS; // 10s
 
-const TRADE_REQUEST_TIMING = 6 * TICKER_REQUEST_TIMING; // 1m
+const TRADE_REQUEST_TIMING = TICKER_REQUEST_TIMING + MILLISECONDS; // 1m + 데이터 조회 및 거래 시차 설정
 
 const TRADE_AVERAGE_VALUE_TIMING = 5 * TRADE_REQUEST_TIMING; // 5m
 
@@ -41,13 +41,13 @@ const STOP_LOSS_RATE = 0.006; // 손절 타이밍
 
 const MIN_BUY_AVENUE_RATE = 0; // TRADE_AVERAGE_VALUE_TIMING 평균보다 조금이라도 작으면 매수\
 
-// 이전 5분의 종가가 20분 평균선 위에 있다면 팔지 않는것으로
-
-// 이전 5분의 종가가 20분 평균선 밑으로 내려왔다면 사지 않는것으로
-
 // 이전 5분의 종가가 20분 평균선 위에 있을때 + 이전 5분의 평균 가격보다 현재가가 저렴하다면 매수
 
 // 현재가가 이전 5분의 평균가격 밑으로 떨어지면 판매
+
+// 이전 5분의 종가가 20분 평균선 위에 있다면 팔지 않는것으로
+
+// 이전 5분의 종가가 20분 평균선 밑으로 내려왔다면 사지 않는것으로
 
 export {
   TRADING_SYSTEM_MAX_RECOVERY,
