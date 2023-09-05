@@ -37,13 +37,12 @@ const TRADE_AVERAGE_VALUE_TIMING = 5 * TRADE_REQUEST_TIMING; // 5m
 
 const STOP_LOSS_RATE = 1.005; // 손절 계수 (여기까지는 기준 미달이어도 참는다)
 
-// 이전 5분의 종가가 20분 평균선 위에 있을때 + 이전 5분의 평균 가격보다 현재가가 저렴하다면 매수
+const TRADE_MODE = Object.freeze({
+	SAFE: 'SAFE',
+	UNSAFE: 'UNSAFE',
+});
 
-// 현재가가 이전 5분의 평균가격 밑으로 떨어지면 판매
-
-// 이전 5분의 종가가 20분 평균선 위에 있다면 팔지 않는것으로
-
-// 이전 5분의 종가가 20분 평균선 밑으로 내려왔다면 사지 않는것으로
+const CURRENT_TRADE_MODE = TRADE_MODE.UNSAFE;
 
 export {
 	TRADING_SYSTEM_MAX_RECOVERY,
@@ -58,4 +57,6 @@ export {
 	TRADE_REQUEST_TIMING,
 	TRADE_AVERAGE_VALUE_TIMING,
 	STOP_LOSS_RATE,
+	TRADE_MODE,
+	CURRENT_TRADE_MODE,
 };

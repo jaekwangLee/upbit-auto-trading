@@ -12,4 +12,9 @@ const PREFER_COIN_MARKET = Object.freeze({
   BITCOIN: 'KRW-BTC',
 });
 
-export { PREFER_COIN_MARKET };
+const MARKET_STATUS = Object.freeze({
+  NORMAL: 'NONE',
+  WARNING: 'CAUTION',
+});
+
+export { PREFER_COIN_MARKET, MARKET_STATUS };
