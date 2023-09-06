@@ -1,3 +1,5 @@
+import { DEFAULT_WEIGHT, PER_WEIGHT_RATE } from "../constant/trading.js";
+
 const reduceArrayWithSameKey = (originArr, arr, key) => {
 	return originArr.reduce((prev, val) => {
 		const matchedValueIndex = arr.findIndex((item) => item[key] === val[key]);
@@ -30,9 +32,6 @@ const getAverageByNumberField = (data = [], key) => {
 };
 
 const getAverageWithWeight = (data = [], key) => {
-	const DEFAULT_WEIGHT = 1; // 기준 가산치 ( 클수록  첫 데이터의 중요도가 높아짐 )
-	const PER_WEIGHT_RATE = -0.001; // 가산치 증가 비율 ( 클수록 먼 데이터의 가치하락 폭이 증가함 )
-
 	return (
 		data.reduce((acc, val, index) => {
 			const currWeight = DEFAULT_WEIGHT + index;

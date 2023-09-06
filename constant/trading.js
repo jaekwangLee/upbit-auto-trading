@@ -42,6 +42,9 @@ const TRADE_MODE = Object.freeze({
 
 const CURRENT_TRADE_MODE = TRADE_MODE.UNSAFE;
 
+const DEFAULT_WEIGHT = 1; // 기준 가산치 ( 클수록  첫 데이터의 중요도가 높아짐 )
+const PER_WEIGHT_RATE = -0.00078; // 가산치 증가 비율 ( 클수록 먼 데이터의 가치하락 폭이 증가함 )
+
 export {
 	TRADING_SYSTEM_MAX_RECOVERY,
 	TRADING_SYSTEM_RECOVERY_PERIOD,
@@ -56,4 +59,6 @@ export {
 	TRADE_AVERAGE_VALUE_TIMING,
 	TRADE_MODE,
 	CURRENT_TRADE_MODE,
+	DEFAULT_WEIGHT,
+	PER_WEIGHT_RATE,
 };
