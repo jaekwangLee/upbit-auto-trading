@@ -10,7 +10,14 @@ import { dConsole, dConsoleWarn } from "../utils/log.js";
 const BASE_UPBIT_URL = "https://api.upbit.com/v1";
 
 const upbitInstance = axios.create({
-  baseURL: "https://api.upbit.com/v1",
+  baseURL: BASE_UPBIT_URL,
+  timeout: 30000,
+});
+
+const BASE_NASDAQ_URL = "https://api.nasdaq.com/api";
+
+const nasdaqInstance = axios.create({
+  baseURL: BASE_NASDAQ_URL,
   timeout: 30000,
 });
 
@@ -23,8 +30,11 @@ const requestAPI = (
   try {
     const headerConfig = {
       "Content-Type": headers["Content-Type"] || CONTENT_TYPE.APPLICATION_JSON,
-      Authorization: headers.Authorization ?? "",
     };
+
+    if (headers.Authorization) {
+      headerConfig['Authorization'] = headers.Authorization;
+    }
 
     if (method === REST_API_METHOD.GET) {
       return instance[method](url, { params, headers: headerConfig });
@@ -76,4 +86,4 @@ const upbitRequest = (url, method, { params, data, headers = {} }) => {
   }
 };
 
-export { upbitInstance, requestAPI, upbitRequest };
+export { upbitInstance, nasdaqInstance, requestAPI, upbitRequest };
