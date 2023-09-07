@@ -45,7 +45,7 @@ const CURRENT_TRADE_MODE = TRADE_MODE.UNSAFE;
 const DEFAULT_WEIGHT = 0; // 1; // 기준 가산치 ( 클수록  첫 데이터의 중요도가 높아짐 )
 const PER_WEIGHT_RATE = 0; // -0.00078; // 가산치 증가 비율 ( 클수록 먼 데이터의 가치하락 폭이 증가함 )
 const MAX_LOSS_RATE = 1.5;
-const MAX_GREED_RATE = 2;
+const MAX_GREED_RATE = 2.1;
 
 export {
 	TRADING_SYSTEM_MAX_RECOVERY,
