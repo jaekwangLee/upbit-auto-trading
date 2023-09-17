@@ -1,4 +1,4 @@
-import { DEFAULT_WEIGHT, PER_WEIGHT_RATE } from "../constant/trading.js";
+import {DEFAULT_WEIGHT, PER_WEIGHT_RATE} from '../constant/trading.js';
 
 const reduceArrayWithSameKey = (originArr, arr, key) => {
 	return originArr.reduce((prev, val) => {
@@ -31,11 +31,11 @@ const getAverageByNumberField = (data = [], key) => {
 	return data.reduce((acc, val) => acc + val[key], 0) / data.length;
 };
 
-const getAverageWithWeight = (data = [], key) => {
+const getAverageWithWeight = (data = [], key, defaultWeight = 0, weightRate = 0) => {
 	return (
 		data.reduce((acc, val, index) => {
-			const currWeight = DEFAULT_WEIGHT + index;
-			const currWeightRate = currWeight * PER_WEIGHT_RATE;
+			const currWeight = defaultWeight + index;
+			const currWeightRate = currWeight * weightRate;
 			const weight = val[key] * currWeightRate;
 			const weightedValue = val[key] + weight;
 
