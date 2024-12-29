@@ -1,20 +1,22 @@
 /** @format */
 
 const PREFER_COIN_MARKET = Object.freeze({
-  RIPPLE: "KRW-XRP",
-  FIRMACHAIN: "KRW-FCT2",
-  DOGE: "KRW-DOGE",
-  ARK: "KRW-ARK",
-  STELALUMEN: "KRW-XLM",
-  BTT: "KRW-BTT",
-  POWR: "KRW-POWR",
-  BLUR: 'KRW-BLUR',
-  BITCOIN: 'KRW-BTC',
+	BITCOIN: 'KRW-BTC',
+	DOGE: 'KRW-DOGE',
+	DOGE: 'KRW-ETH',
+
+	// RIPPLE: 'KRW-XRP',
+	// FIRMACHAIN: 'KRW-FCT2',
+	// ARK: 'KRW-ARK',
+	// STELALUMEN: 'KRW-XLM',
+	// BTT: 'KRW-BTT',
+	// POWR: 'KRW-POWR',
+	// BLUR: 'KRW-BLUR',
 });
 
 const MARKET_STATUS = Object.freeze({
-  NORMAL: 'NONE',
-  WARNING: 'CAUTION',
+	NORMAL: 'NONE',
+	WARNING: 'CAUTION',
 });
 
-export { PREFER_COIN_MARKET, MARKET_STATUS };
+export {PREFER_COIN_MARKET, MARKET_STATUS};
