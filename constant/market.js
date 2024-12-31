@@ -1,14 +1,13 @@
 /** @format */
 
 const PREFER_COIN_MARKET = Object.freeze({
-	BITCOIN: 'KRW-BTC',
+	BIT: 'KRW-BTC',
 	DOGE: 'KRW-DOGE',
-	DOGE: 'KRW-ETH',
-
-	// RIPPLE: 'KRW-XRP',
+	ETH: 'KRW-ETH',
+	RIPPLE: 'KRW-XRP',
+	ARK: 'KRW-ARK',
+	STELALUMEN: 'KRW-XLM',
 	// FIRMACHAIN: 'KRW-FCT2',
-	// ARK: 'KRW-ARK',
-	// STELALUMEN: 'KRW-XLM',
 	// BTT: 'KRW-BTT',
 	// POWR: 'KRW-POWR',
 	// BLUR: 'KRW-BLUR',
