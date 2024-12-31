@@ -18,4 +18,9 @@ const MARKET_STATUS = Object.freeze({
 	WARNING: 'CAUTION',
 });
 
-export {PREFER_COIN_MARKET, MARKET_STATUS};
+const ORDER_STATUS = Object.freeze({
+	WAIT: 'WAIT', // 체결 대기
+	WATCH: 'WATCH', // 예약주문 대기
+});
+
+export {PREFER_COIN_MARKET, MARKET_STATUS, ORDER_STATUS};
