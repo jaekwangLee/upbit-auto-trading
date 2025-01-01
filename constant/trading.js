@@ -33,9 +33,9 @@ const MOVING_AVERAGE_MINUTE = Object.freeze({
 	SIXTY: 60,
 });
 
-const TICKER_REQUEST_TIMING = 30 * MILLISECONDS;
+const TICKER_REQUEST_TIMING = 2 * MILLISECONDS;
 
-const TRADE_REQUEST_TIMING = 60 * MILLISECONDS;
+const TRADE_REQUEST_TIMING = 11 * MILLISECONDS;
 
 const TRADE_MODE = Object.freeze({
 	SAFE: 'SAFE',
@@ -46,8 +46,10 @@ const NASDAQ_DANGER_CHANGE_RATE = -1.68;
 
 const DEFAULT_WEIGHT = 0; // 1; // 기준 가산치 ( 클수록  첫 데이터의 중요도가 높아짐 )
 const PER_WEIGHT_RATE = 0.0012; // -0.00078; // 가산치 증감 비율 ( 작을수록 먼 데이터의 가치하락 폭이 증가함 / 클수록 먼 데이터의 가치상승 폭이 증가함 )
-const MAX_LOSS_RATE = 0.4;
-const MAX_GREED_RATE = 0.4;
+
+// upbit 매매 수수료 총 0.01%
+const MAX_LOSS_RATE = 0.2;
+const MAX_GREED_RATE = 0.25;
 
 const MAX_ONCE_BUY_VALUE = 10000;
 

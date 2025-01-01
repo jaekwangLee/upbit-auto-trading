@@ -2,7 +2,7 @@
 
 import sqlite3 from 'sqlite3';
 
-import {dConsole, dConsoleWarn, dConsoleError} from './utils/log.js';
+import {dConsole, dConsoleError} from './utils/log.js';
 
 class Database {
 	static instance = null;
