@@ -49,7 +49,7 @@ const PER_WEIGHT_RATE = 0.0012; // -0.00078; // 가산치 증감 비율 ( 작을
 
 // upbit 매매 수수료 총 0.01%
 const MAX_LOSS_RATE = 0.2;
-const MAX_GREED_RATE = 0.25;
+const MAX_GREED_RATE = 0.15;
 
 const MAX_ONCE_BUY_VALUE = 10000;
 
