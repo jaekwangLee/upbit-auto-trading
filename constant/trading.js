@@ -46,8 +46,8 @@ const NASDAQ_DANGER_CHANGE_RATE = -1.68;
 
 const DEFAULT_WEIGHT = 0; // 1; // 기준 가산치 ( 클수록  첫 데이터의 중요도가 높아짐 )
 const PER_WEIGHT_RATE = 0.0012; // -0.00078; // 가산치 증감 비율 ( 작을수록 먼 데이터의 가치하락 폭이 증가함 / 클수록 먼 데이터의 가치상승 폭이 증가함 )
-const MAX_LOSS_RATE = 0.5;
-const MAX_GREED_RATE = 2;
+const MAX_LOSS_RATE = 0.4;
+const MAX_GREED_RATE = 0.4;
 
 const MAX_ONCE_BUY_VALUE = 10000;
 
