@@ -26,6 +26,7 @@ const ORDER_TYPE = Object.freeze({
 const MOVING_AVERAGE_MINUTE = Object.freeze({
 	FIVE: 5,
 	TWENTY: 20,
+	THIRTY: 30,
 	SIXTY: 60,
 });
 
