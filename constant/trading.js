@@ -24,10 +24,10 @@ const ORDER_TYPE = Object.freeze({
 });
 
 const MOVING_AVERAGE_MINUTE = Object.freeze({
-	FIVE: 5,
-	TWENTY: 20,
-	THIRTY: 30,
-	SIXTY: 60,
+	FIVE: 1,
+	TWENTY: 4,
+	THIRTY: 6,
+	SIXTY: 12,
 });
 
 const TICKER_REQUEST_TIMING = 3 * MILLISECONDS;
