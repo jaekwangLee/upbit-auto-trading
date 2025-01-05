@@ -12,7 +12,7 @@ const fetchAllMarkets = () => {
 	});
 };
 
-const fetchCandle = (ticker, unit = 1, count = 5) => {
+const fetchCandle = (ticker, unit = 1, count = 30) => {
 	return requestAPI(upbitInstance, `/candles/minutes/${unit}`, REST_API_METHOD.GET, {
 		params: {
 			market: ticker,

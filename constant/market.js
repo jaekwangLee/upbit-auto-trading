@@ -7,6 +7,7 @@ const PREFER_COIN_MARKET = Object.freeze({
 	RIPPLE: 'KRW-XRP',
 	ARK: 'KRW-ARK',
 	STELALUMEN: 'KRW-XLM',
+	BIT_GOLD: 'KRW-BTG',
 	// FIRMACHAIN: 'KRW-FCT2',
 	// BTT: 'KRW-BTT',
 	// POWR: 'KRW-POWR',
