@@ -10,7 +10,7 @@ const runAutoTradingSystem = async () => {
 	const trader = new Trader();
 
 	try {
-		trader.build().runTickerDataCollector().runTradeWorker();
+		trader.setPreferMarketFinder().setTrader().runTickerDataCollector().runTradeWorker();
 	} catch (error) {
 		console.error(`[ERROR] trading system is gone, error: ${error}`);
 
