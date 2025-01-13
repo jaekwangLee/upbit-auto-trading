@@ -53,18 +53,16 @@ export class Logger {
 		this.logs = [];
 	}
 
-	static push({type, message}) {
-		console.log(message);
-
+	static async push({type, message}) {
 		const getChannel = (pushType) => {
 			switch (pushType) {
 				case Logger.PUSH_TYPE.BUY:
-					return '매수_로그';
+					return '#매수_로그';
 				case Logger.PUSH_TYPE.SELL:
-					return '매도_로그';
+					return '#매도_로그';
 				case Logger.PUSH_TYPE.NICE_TRADE:
 				case Logger.PUSH_TYPE.BAD_TRADE:
-					return '매매_수익률_로그';
+					return '#매매_수익률_로그';
 			}
 		};
 
@@ -81,9 +79,30 @@ export class Logger {
 			}
 		};
 
-		const channel = getChannel(type);
-		const emoji = getEmoji(type);
-		void postMessageAPI({message, channel, emoji});
+		const getUserName = (pushType) => {
+			switch (pushType) {
+				case Logger.PUSH_TYPE.BUY:
+					return '매수쟁이';
+				case Logger.PUSH_TYPE.SELL:
+					return '매도쟁이';
+				case Logger.PUSH_TYPE.NICE_TRADE:
+					return '해피';
+				case Logger.PUSH_TYPE.BAD_TRADE:
+					return '새드';
+			}
+		};
+
+		try {
+			const channel = getChannel(type);
+			const emoji = getEmoji(type);
+			const userName = getUserName(type);
+
+			this.add(this.PUSH_TYPE.DEFAULT, channel, emoji, message);
+
+			await postMessageAPI({message, channel, emoji, username: userName});
+		} catch (e) {
+			console.log('Failed to post slack message: ', e);
+		}
 	}
 
 	static timestamp(format = 'YYYY-MM-DD hh:mm:ss') {
