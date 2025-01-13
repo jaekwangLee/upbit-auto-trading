@@ -1,3 +1,4 @@
+import {postMessageAPI} from '../api/slack/message.js';
 import {dateFormat} from './date.js';
 
 export class Logger {
@@ -9,6 +10,13 @@ export class Logger {
 		DEFAULT: 'DEFAULT',
 		WARN: 'WARN',
 		ERROR: 'ERROR',
+	};
+
+	static PUSH_TYPE = {
+		BUY: 'BUY',
+		SELL: 'SELL',
+		NICE_TRADE: 'NICE_TRADE',
+		BAD_TRADE: 'BAD_TRADE',
 	};
 
 	static add(type, ...message) {
@@ -43,6 +51,39 @@ export class Logger {
 
 	static clear() {
 		this.logs = [];
+	}
+
+	static push({type, message}) {
+		console.log(message);
+
+		const getChannel = (pushType) => {
+			switch (pushType) {
+				case Logger.PUSH_TYPE.BUY:
+					return '매수_로그';
+				case Logger.PUSH_TYPE.SELL:
+					return '매도_로그';
+				case Logger.PUSH_TYPE.NICE_TRADE:
+				case Logger.PUSH_TYPE.BAD_TRADE:
+					return '매매_수익률_로그';
+			}
+		};
+
+		const getEmoji = (pushType) => {
+			switch (pushType) {
+				case Logger.PUSH_TYPE.BUY:
+					return ':hear_no_evil:';
+				case Logger.PUSH_TYPE.SELL:
+					return ':see_no_evil:';
+				case Logger.PUSH_TYPE.NICE_TRADE:
+					return ':tada:';
+				case Logger.PUSH_TYPE.BAD_TRADE:
+					return ':sob:';
+			}
+		};
+
+		const channel = getChannel(type);
+		const emoji = getEmoji(type);
+		void postMessageAPI({message, channel, emoji});
 	}
 
 	static timestamp(format = 'YYYY-MM-DD hh:mm:ss') {
